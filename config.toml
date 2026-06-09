@@ -1,0 +1,43 @@
+[llm]
+base_url = "https://openrouter.ai/api/v1"
+model = "openai/gpt-oss-120b:free"
+max_tokens = 1024
+
+[prompt.en]
+system = "You are a concise agricultural data analyst. Respond only in markdown. No preamble."
+template = """Given this agricultural dataset with the following columns: {columns}
+
+Data:
+{data_rows}
+
+Provide:
+1. A 2-sentence summary of the overall trend
+2. The top 3 notable values with a one-line explanation each
+3. One anomaly if present, one line only
+4. One actionable insight, one line
+
+Be brief. No repetition."""
+
+[prompt.fr]
+system = "Tu es un analyste agricole concis. Réponds uniquement en markdown. Pas de préambule."
+template = """Voici un jeu de données agricoles avec les colonnes suivantes : {columns}
+
+Données :
+{data_rows}
+
+Fournis :
+1. Un résumé en 2 phrases de la tendance générale
+2. Les 3 valeurs les plus notables avec une explication d'une ligne chacune
+3. Une anomalie si présente, en une ligne seulement
+4. Une recommandation concrète, en une ligne
+
+Sois bref. Pas de répétition."""
+
+[parser]
+default_x_column = 0
+default_y_column = 1
+
+[server]
+host = "0.0.0.0"
+port = 8000
+allowed_origins = ["http://localhost:5173"]
