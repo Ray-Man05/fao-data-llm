@@ -38,6 +38,4 @@ default_x_column = 0
 default_y_column = 1
 
 [server]
-host = "0.0.0.0"
-port = 8000
-allowed_origins = ["http://localhost:5173"]
+allowed_origins = ["http://localhost:5173", "https://fao-data-llm.vercel.app"]
