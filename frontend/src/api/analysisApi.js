@@ -1,10 +1,11 @@
-console.log("API_BASE:", import.meta.env.VITE_API_BASE);
+const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+console.log("API_BASE:", API_BASE);
 
 export async function fetchColumns(file) {
   const form = new FormData();
   form.append("file", file);
 
-  const response = await fetch("/upload/columns", { method: "POST", body: form });
+  const response = await fetch(`${API_BASE}/upload/columns`, { method: "POST", body: form });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.detail ?? "Failed to fetch columns");
@@ -16,7 +17,7 @@ export async function fetchPreview(file) {
   const form = new FormData();
   form.append("file", file);
 
-  const response = await fetch("/upload/preview", { method: "POST", body: form });
+  const response = await fetch(`${API_BASE}/upload/preview`, { method: "POST", body: form });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.detail ?? "Failed to fetch preview");
@@ -30,7 +31,7 @@ export async function fetchAnalysis(file, columns, lang) {
   form.append("columns", JSON.stringify(columns));
   form.append("lang", lang);
 
-  const response = await fetch("/upload/analyze", { method: "POST", body: form });
+  const response = await fetch(`${API_BASE}/upload/analyze`, { method: "POST", body: form });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.detail ?? "Failed to fetch analysis");
