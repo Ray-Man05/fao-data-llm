@@ -1,3 +1,5 @@
+console.log("API_BASE:", import.meta.env.VITE_API_BASE);
+
 export async function fetchColumns(file) {
   const form = new FormData();
   form.append("file", file);
