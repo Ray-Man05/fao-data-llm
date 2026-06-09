@@ -1,4 +1,3 @@
-import sys
 import os
 import tomllib
 from pathlib import Path
@@ -13,7 +12,16 @@ def _namespace(d: dict) -> SimpleNamespace:
 
 
 def _load() -> SimpleNamespace:
-    path = Path(__file__).parent.parent / "config.toml"
+    local = Path(__file__).parent / "config.toml"
+    parent = Path(__file__).parent.parent / "config.toml"
+
+    if local.exists():
+        path = local
+    elif parent.exists():
+        path = parent
+    else:
+        raise FileNotFoundError("config.toml not found in backend/ or project root.")
+
     with open(path, "rb") as f:
         ns = _namespace(tomllib.load(f))
 
